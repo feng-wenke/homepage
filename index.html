@@ -151,7 +151,7 @@
     document.body.className = savedTheme + '-theme'; // 应用主题
 
     // 检查是否由特定上级页面跳转过来
-    var allowedReferrer = 'login.html'; // 替换为上级页面的URL
+    var allowedReferrer = 'https://feng-wenke.github.io/login'; // 替换为上级页面的URL
     if (!document.referrer || document.referrer.indexOf(allowedReferrer) === -1) {
         // 如果不是从上级页面跳转过来的，则重定向到上级页面
         window.location.href = allowedReferrer;
