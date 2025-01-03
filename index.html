@@ -145,35 +145,43 @@
         <p>&copy; 2025 Your Company. All rights reserved.</p>
     </footer>
     <script>
-      // 页面加载时，从localStorage获取主题并应用
-        document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function() {
+            // 页面加载时，从localStorage获取主题并应用
             var savedTheme = localStorage.getItem('theme') || 'light';
             document.body.className = savedTheme + '-theme'; // 应用主题
-        });
-        // 照片轮播逻辑
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-images img');
-        const totalSlides = slides.length;
 
-        function showSlide(index) {
-            slides.forEach((slide) => {
-                slide.classList.remove('active');
-            });
-            slides[index].classList.add('active');
-        }
+            // 检查是否由特定上级页面跳转过来
+            var allowedReferrer = 'https://feng-wenke.github.io/login/'; // 期望的跳转来源URL
+            if (!document.referrer || document.referrer.indexOf(allowedReferrer) !== 0) {
+                // 如果不是从上级页面跳转过来的，则重定向到登录页面
+                window.location.href = allowedReferrer;
+            }
 
-        function moveSlide(step) {
-            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            // 照片轮播逻辑
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-images img');
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide) => {
+                    slide.classList.remove('active');
+                });
+                slides[index].classList.add('active');
+            }
+
+            function moveSlide(step) {
+                currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            // 初始化轮播器，显示第一张图片
             showSlide(currentSlide);
-        }
 
-        // 初始化轮播器，显示第一张图片
-        showSlide(currentSlide);
-
-        // 自动轮播
-        setInterval(() => {
-            moveSlide(1);
-        }, 4000); // 每4秒切换一次图片
+            // 自动轮播
+            setInterval(() => {
+                moveSlide(1);
+            }, 4000); // 每4秒切换一次图片
+        });
     </script>
 </body>
 
