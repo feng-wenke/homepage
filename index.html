@@ -145,18 +145,21 @@
         <p>&copy; 2025 Your Company. All rights reserved.</p>
     </footer>
     <script>
-        // 页面加载时，检查是否由上级页面跳转过来
-        document.addEventListener('DOMContentLoaded', function() {
-            var savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.className = savedTheme + '-theme'; // 应用主题
+       document.addEventListener('DOMContentLoaded', function() {
+    // 获取保存的主题设置
+    var savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.className = savedTheme + '-theme'; // 应用主题
 
-            // 检查是否由上级页面跳转过来
-            var allowedReferrer = 'https://feng-wenke.github.io/login/'; // 替换为上级页面的URL
-            if (!document.referrer || document.referrer.indexOf(allowedReferrer) === -1) {
-                // 如果不是从上级页面跳转过来的，则重定向到上级页面
-                window.location.href = allowedReferrer;
-            }
-        });
+    // 检查是否由特定上级页面跳转过来
+    var allowedReferrer = 'login.html'; // 替换为上级页面的URL
+    if (!document.referrer || document.referrer.indexOf(allowedReferrer) === -1) {
+        // 如果不是从上级页面跳转过来的，则重定向到上级页面
+        window.location.href = allowedReferrer;
+    }
+
+    // 初始化轮播器，显示第一张图片
+    showSlide(currentSlide);
+});
         // 页面加载时，从localStorage获取主题并应用
         document.addEventListener('DOMContentLoaded', function() {
             var savedTheme = localStorage.getItem('theme') || 'light';
