@@ -179,14 +179,14 @@
         var savedLanguage = localStorage.getItem('language') || 'en';
         updateLanguageTexts(savedLanguage); // 更新页面文本
 
-        <!--
-        // 检查是否由特定上级页面跳转过来
+        
+        /* 检查是否由特定上级页面跳转过来
         var allowedReferrer = 'https://feng-wenke.github.io/login'; // 替换为上级页面的URL
         if (!document.referrer || document.referrer.indexOf(allowedReferrer) === -1) {
             // 如果不是从上级页面跳转过来的，则重定向到上级页面
             window.location.href = allowedReferrer;
         }
-        -->
+        */
         // 初始化轮播器，显示第一张图片
         showSlide(currentSlide);
 });
