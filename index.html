@@ -7,67 +7,52 @@
     <title>Home Page</title>
     <style>
         /* 主题样式 */
-        
         body.light-theme {
             background-color: #f0f0f0;
             color: #333;
         }
-        
         body.dark-theme {
             background-color: #333;
             color: #f0f0f0;
         }
         /* 导航栏样式 */
-        
         nav ul {
             list-style-type: none;
             padding: 0;
         }
-        
         nav ul li {
             display: inline;
             margin-right: 10px;
         }
-        
         nav ul li a {
             text-decoration: none;
             color: #e11f1f;
         }
         /* 欢迎信息样式 */
-        
         .welcome-message {
             text-align: center;
             margin-top: 20px;
         }
         /* 页脚样式 */
-        
         footer {
             margin-top: 20px;
             text-align: center;
         }
         /* 照片轮播样式 */
-        
         .carousel {
             position: relative;
             max-width: 600px;
-            /* 根据需要调整大小 */
             margin: 20px auto;
             overflow: hidden;
         }
-        
         .carousel-images img {
             width: 100%;
             display: none;
-            /* 默认不显示图片 */
             transition: opacity 1s ease-in-out;
-            /* 平滑过渡效果 */
         }
-        
         .carousel-images img.active {
             display: block;
-            /* 显示当前活动的图片 */
         }
-        
         .carousel-button {
             position: absolute;
             top: 50%;
@@ -78,38 +63,32 @@
             cursor: pointer;
             z-index: 100;
         }
-        
         .carousel-button.prev {
             left: 10px;
         }
-        
         .carousel-button.next {
             right: 10px;
         }
         .carousel-indicators {
-    text-align: center;
-    position: relative; /* 更改为相对定位 */
-    margin-top: 10px; /* 添加一些顶部间距 */
-    margin-bottom: 20px; /* 添加一些底部间距，为下面的内容留出空间 */
-    width: 100%;
-}
-
-    
-    .dot {
-        cursor: pointer;
-        height: 8px;
-        width: 8px;
-        margin: 0 5px;
-        background-color: #717171;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-    
-    .dot.active {
-        background-color: #27c96d;
-    }
-        
+            text-align: center;
+            position: relative;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .dot {
+            cursor: pointer;
+            height: 8px;
+            width: 8px;
+            margin: 0 5px;
+            background-color: #717171;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .dot.active {
+            background-color: #27c96d;
+        }
     </style>
 </head>
 
@@ -141,14 +120,13 @@
                 <img src="11.jpg" alt="Image 2">
                 <img src="17.jpg" alt="Image 3">
                 <img src="15.jpg" alt="Image 4">
-                <img src="5.jpg" alt="Image 4">
-                <img src="7.jpg" alt="Image 4">
+                <img src="5.jpg" alt="Image 5">
+                <img src="7.jpg" alt="Image 6">
                 <!-- 更多图片... -->
             </div>
             <!-- 轮播导航按钮 -->
             <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
-            
         </div>
         <div class="carousel-indicators"></div>
 
@@ -157,27 +135,20 @@
     <footer>
         <p>&copy; 2025 Your Company. All rights reserved.</p>
     </footer>
-     
-<script>
-     document.addEventListener('DOMContentLoaded', function() {
-        // 获取保存的主题设置
-        var savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.className = savedTheme + '-theme'; // 应用主题
 
-        var savedLanguage = localStorage.getItem('language') || 'en';
-        updateLanguageTexts(savedLanguage); // 更新页面文本
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取保存的主题设置
+            var savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme + '-theme'; // 应用主题
 
-        
-        /* 检查是否由特定上级页面跳转过来
-        var allowedReferrer = 'https://feng-wenke.github.io/login'; // 替换为上级页面的URL
-        if (!document.referrer || document.referrer.indexOf(allowedReferrer) === -1) {
-            // 如果不是从上级页面跳转过来的，则重定向到上级页面
-            window.location.href = allowedReferrer;
-        }
-        */
-        // 初始化轮播器，显示第一张图片
-        showSlide(currentSlide);
-});
+            var savedLanguage = localStorage.getItem('language') || 'en';
+            updateLanguageTexts(savedLanguage); // 更新页面文本
+
+            // 初始化轮播器，显示第一张图片
+            showSlide(currentSlide);
+        });
+
         // 照片轮播逻辑
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-images img');
@@ -196,13 +167,11 @@
             showSlide(currentSlide);
         }
 
-        // 初始化轮播器，显示第一张图片
-        showSlide(currentSlide);
-
         // 自动轮播
         setInterval(() => {
             moveSlide(1);
         }, 6000); // 每6秒切换一次图片
+
         function updateLanguageTexts(lang) {
             document.querySelectorAll('a[data-text-en]').forEach(function(anchor) {
                 if (lang === 'zh') {
@@ -212,22 +181,23 @@
                 }
             });
         }
+
         // 创建指示器
-const indicatorsContainer = document.querySelector('.carousel-indicators');
-for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('span');
-    dot.classList.add('dot');
-    dot.addEventListener('click', () => moveSlide(i - currentSlide));
-    indicatorsContainer.appendChild(dot);
-}
-// 更新指示器状态
-function updateIndicators(index) {
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-    });
-}
-</script>
- 
+        const indicatorsContainer = document.querySelector('.carousel-indicators');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => moveSlide(i - currentSlide));
+            indicatorsContainer.appendChild(dot);
+        }
+
+        // 更新指示器状态
+        function updateIndicators(index) {
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+    </script>
 </body>
 
 </html>
