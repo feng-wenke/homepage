@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Document</title>
     <style>
         /* 主题样式 */
         body.light-theme {
             background-color: #f0f0f0;
             color: #333;
         }
+        
         body.dark-theme {
             background-color: #333;
             color: #f0f0f0;
         }
+        
         /* 导航栏样式 */
         nav ul {
             list-style-type: none;
             padding: 0;
         }
+        
         nav ul li {
             display: inline;
             margin-right: 10px;
         }
+        
         nav ul li a {
             text-decoration: none;
             color: #e11f1f;
         }
+        
         /* 欢迎信息样式 */
         .welcome-message {
             text-align: center;
             margin-top: 20px;
         }
+        
         /* 页脚样式 */
         footer {
             margin-top: 20px;
             text-align: center;
         }
+        
         /* 照片轮播样式 */
         .carousel {
             position: relative;
@@ -45,14 +51,17 @@
             margin: 20px auto;
             overflow: hidden;
         }
+        
         .carousel-images img {
             width: 100%;
             display: none;
             transition: opacity 1s ease-in-out;
         }
+        
         .carousel-images img.active {
             display: block;
         }
+        
         .carousel-button {
             position: absolute;
             top: 50%;
@@ -63,12 +72,15 @@
             cursor: pointer;
             z-index: 100;
         }
+        
         .carousel-button.prev {
             left: 10px;
         }
+        
         .carousel-button.next {
             right: 10px;
         }
+        
         .carousel-indicators {
             text-align: center;
             position: relative;
@@ -76,6 +88,7 @@
             margin-bottom: 20px;
             width: 100%;
         }
+        
         .dot {
             cursor: pointer;
             height: 8px;
@@ -86,12 +99,12 @@
             display: inline-block;
             transition: background-color 0.6s ease;
         }
+        
         .dot.active {
             background-color: #27c96d;
         }
     </style>
 </head>
-
 <body class="light-theme">
     <header>
         <nav>
@@ -120,8 +133,8 @@
                 <img src="11.jpg" alt="Image 2">
                 <img src="17.jpg" alt="Image 3">
                 <img src="15.jpg" alt="Image 4">
-                <img src="5.jpg" alt="Image 5">
-                <img src="7.jpg" alt="Image 6">
+                <img src="5.jpg" alt="Image 4">
+                <img src="7.jpg" alt="Image 4">
                 <!-- 更多图片... -->
             </div>
             <!-- 轮播导航按钮 -->
@@ -137,18 +150,6 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取保存的主题设置
-            var savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.className = savedTheme + '-theme'; // 应用主题
-
-            var savedLanguage = localStorage.getItem('language') || 'en';
-            updateLanguageTexts(savedLanguage); // 更新页面文本
-
-            // 初始化轮播器，显示第一张图片
-            showSlide(currentSlide);
-        });
-
         // 照片轮播逻辑
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-images img');
@@ -167,11 +168,27 @@
             showSlide(currentSlide);
         }
 
-        // 自动轮播
-        setInterval(() => {
-            moveSlide(1);
-        }, 6000); // 每6秒切换一次图片
+        // 创建指示器
+        function createIndicators() {
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.addEventListener('click', () => {
+                    moveSlide(i - currentSlide);
+                });
+                indicatorsContainer.appendChild(dot);
+            }
+        }
 
+        // 更新指示器状态
+        function updateIndicators(index) {
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // 更新文本语言
         function updateLanguageTexts(lang) {
             document.querySelectorAll('a[data-text-en]').forEach(function(anchor) {
                 if (lang === 'zh') {
@@ -182,22 +199,109 @@
             });
         }
 
-        // 创建指示器
-        const indicatorsContainer = document.querySelector('.carousel-indicators');
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => moveSlide(i - currentSlide));
-            indicatorsContainer.appendChild(dot);
+        // 主题切换
+        function toggleTheme() {
+            const currentTheme = document.body.className.replace('-theme', '');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            saveTheme(newTheme);
         }
 
-        // 更新指示器状态
-        function updateIndicators(index) {
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
+        // 保存主题设置
+        function saveTheme(theme) {
+            document.body.className = theme + '-theme';
+            // 使用 fetch API 保存到服务器
+            fetch('http://localhost:3000/api/data/theme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: theme }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Theme saved successfully');
+                } else {
+                    console.error('Failed to save theme');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // 获取主题设置
+        function getTheme() {
+            fetch('http://localhost:3000/api/data/theme')
+            .then(response => response.json())
+            .then(data => {
+                if (data.value) {
+                    document.body.className = data.value + '-theme';
+                } else {
+                    // 如果没有设置过主题，使用默认值
+                    saveTheme('light');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取语言设置
+            getLanguage();
+            // 获取主题设置
+            getTheme();
+            // 初始化轮播器，显示第一张图片
+            showSlide(currentSlide);
+            // 创建指示器
+            createIndicators();
+            // 自动轮播
+            setInterval(() => {
+                moveSlide(1);
+            }, 6000); // 每6秒切换一次图片
+        });
+
+        // 保存语言设置
+        function saveLanguage(lang) {
+            // 使用 fetch API 保存到服务器
+            fetch('http://localhost:3000/api/data/language', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: lang }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Language saved successfully');
+                } else {
+                    console.error('Failed to save language');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // 获取语言设置
+        function getLanguage() {
+            fetch('http://localhost:3000/api/data/language')
+            .then(response => response.json())
+            .then(data => {
+                if (data.value) {
+                    updateLanguageTexts(data.value);
+                } else {
+                    // 如果没有设置过语言，使用默认值
+                    saveLanguage('en');
+                    updateLanguageTexts('en');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
         }
     </script>
 </body>
-
 </html>
