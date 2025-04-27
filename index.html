@@ -7,13 +7,22 @@
     <title>Home Page</title>
     <style>
         /* 主题样式 */
-        body.light-theme {
-            background-color: #f0f0f0;
-            color: #333;
+        :root {
+            --background-color-light: #f0f0f0;
+            --text-color-light: #333;
+            --background-color-dark: #333;
+            --text-color-dark: #f0f0f0;
+            --link-color: #e11f1f;
+            --dot-color: #717171;
+            --dot-active-color: #27c96d;
+        }
+        body {
+            background-color: var(--background-color-light);
+            color: var(--text-color-light);
         }
         body.dark-theme {
-            background-color: #333;
-            color: #f0f0f0;
+            background-color: var(--background-color-dark);
+            color: var(--text-color-dark);
         }
         /* 导航栏样式 */
         nav ul {
@@ -26,7 +35,7 @@
         }
         nav ul li a {
             text-decoration: none;
-            color: #e11f1f;
+            color: var(--link-color);
         }
         /* 欢迎信息样式 */
         .welcome-message {
@@ -81,13 +90,13 @@
             height: 8px;
             width: 8px;
             margin: 0 5px;
-            background-color: #717171;
+            background-color: var(--dot-color);
             border-radius: 50%;
             display: inline-block;
             transition: background-color 0.6s ease;
         }
         .dot.active {
-            background-color: #27c96d;
+            background-color: var(--dot-active-color);
         }
     </style>
 </head>
@@ -96,11 +105,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="https://feng-wenke.github.io/profile" data-text-en="Profile" data-text-zh="个人资料">Profile</a></li>
-                <li><a href="https://feng-wenke.github.io/settings" data-text-en="Settings" data-text-zh="设置">Settings</a></li>
-                <li><a href="https://feng-wenke.github.io/musics" data-text-en="Musics" data-text-zh="音乐">Music</a></li>
-                <li><a href="https://feng-wenke.github.io/video" data-text-en="Video" data-text-zh="视频">Video</a></li>
-                <li><a href="https://photo.328249.xyz/" data-text-en="Photo" data-text-zh="照片">Photo</a></li>
+                <li><a href="https://feng-wenke.github.io/profile">Profile</a></li>
+                <li><a href="https://feng-wenke.github.io/settings">Settings</a></li>
+                <li><a href="https://feng-wenke.github.io/musics">Music</a></li>
+                <li><a href="https://feng-wenke.github.io/video">Video</a></li>
+                <li><a href="https://photo.328249.xyz/">Photo</a></li>
             </ul>
         </nav>
     </header>
@@ -112,7 +121,11 @@
     <section class="content">
         <!-- Your content goes here -->
         <h2>Recent Activities</h2>
-       
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Home Page. All rights reserved.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -125,12 +138,10 @@
         });
 
         function updateLanguageTexts(lang) {
-            document.querySelectorAll('a[data-text-en]').forEach(function(anchor) {
-                if (lang === 'zh') {
-                    anchor.textContent = anchor.getAttribute('data-text-zh');
-                } else {
-                    anchor.textContent = anchor.getAttribute('data-text-en');
-                }
+            document.querySelectorAll('a').forEach(function(anchor) {
+                var enText = anchor.textContent;
+                var zhText = anchor.getAttribute('href').split('/').pop(); // 假设URL最后一部分是中文文本
+                anchor.textContent = lang === 'zh' ? zhText : enText;
             });
         }
     </script>
