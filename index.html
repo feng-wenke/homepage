@@ -7,16 +7,12 @@
     <title>Home Page</title>
     <style>
         /* 主题样式 */
-        body.light-theme {
+        body {
             background-color: #f0f0f0;
             color: #333;
             position: relative;
             min-height: 100vh;
             margin: 0;
-        }
-        body.dark-theme {
-            background-color: #333;
-            color: #f0f0f0;
         }
         /* 导航栏样式 */
         nav ul {
@@ -66,15 +62,15 @@
     </style>
 </head>
 
-<body class="light-theme">
+<body>
     <header>
         <nav>
             <ul>
-                <li><a href="https://feng-wenke.github.io/profile" data-text-en="Profile" data-text-zh="个人资料">Profile</a></li>
-                <li><a href="https://feng-wenke.github.io/settings" data-text-en="Settings" data-text-zh="设置">Settings</a></li>
-                <li><a href="https://feng-wenke.github.io/musics" data-text-en="Musics" data-text-zh="音乐">Music</a></li>
-                <li><a href="https://feng-wenke.github.io/video" data-text-en="Video" data-text-zh="视频">Video</a></li>
-                <li><a href="https://photo.328249.xyz/" data-text-en="Photo" data-text-zh="照片">Photo</a></li>
+                <li><a href="https://feng-wenke.github.io/profile">Profile</a></li>
+                <li><a href="https://feng-wenke.github.io/settings">Settings</a></li>
+                <li><a href="https://feng-wenke.github.io/musics">Music</a></li>
+                <li><a href="https://feng-wenke.github.io/video">Video</a></li>
+                <li><a href="https://photo.328249.xyz/">Photo</a></li>
             </ul>
         </nav>
     </header>
@@ -92,27 +88,6 @@
     <footer>
         <p>&copy; 2025 Your Website</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取保存的主题设置
-            var savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.className = savedTheme + '-theme'; // 应用主题
-
-            var savedLanguage = localStorage.getItem('language') || 'en';
-            updateLanguageTexts(savedLanguage); // 更新页面文本
-        });
-
-        function updateLanguageTexts(lang) {
-            document.querySelectorAll('a[data-text-en]').forEach(function(anchor) {
-                if (lang === 'zh') {
-                    anchor.textContent = anchor.getAttribute('data-text-zh');
-                } else {
-                    anchor.textContent = anchor.getAttribute('data-text-en');
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>
