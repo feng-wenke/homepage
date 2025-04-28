@@ -7,128 +7,70 @@
     <title>Home Page</title>
     <style>
         /* 主题样式 */
-        
-        body.light-theme {
+        body {
             background-color: #f0f0f0;
             color: #333;
-        }
-        
-        body.dark-theme {
-            background-color: #333;
-            color: #f0f0f0;
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
         }
         /* 导航栏样式 */
-        
         nav ul {
             list-style-type: none;
             padding: 0;
+            text-align: center;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        
         nav ul li {
-            display: inline;
-            margin-right: 10px;
+            display: block;
+            margin: 10px 0;
         }
-        
         nav ul li a {
             text-decoration: none;
-            color: #e11f1f;
+            color: #ffffff; /* 文字颜色改为白色 */
+            background-color: #e1801f; /* 背景颜色改为红色 */
+            border: 1px solid #e11f1f;
+            padding: 10px;
+            display: block;
+            width: 150px;
+            transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+        }
+        nav ul li a:hover {
+            background-color: rgb(255, 192, 192); /* 鼠标悬停时背景颜色变深 */
+            color: #ffffff; /* 鼠标悬停时文字颜色保持白色 */
         }
         /* 欢迎信息样式 */
-        
         .welcome-message {
             text-align: center;
             margin-top: 20px;
         }
         /* 页脚样式 */
-        
         footer {
-            margin-top: 20px;
-            text-align: center;
-        }
-        /* 照片轮播样式 */
-        
-        .carousel {
-            position: relative;
-            max-width: 600px;
-            /* 根据需要调整大小 */
-            margin: 20px auto;
-            overflow: hidden;
-        }
-        
-        .carousel-images img {
-            width: 100%;
-            display: none;
-            /* 默认不显示图片 */
-            transition: opacity 1s ease-in-out;
-            /* 平滑过渡效果 */
-        }
-        
-        .carousel-images img.active {
-            display: block;
-            /* 显示当前活动的图片 */
-        }
-        
-        .carousel-button {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 100;
-        }
-        
-        .carousel-button.prev {
-            left: 10px;
-        }
-        
-        .carousel-button.next {
-            right: 10px;
-        }
-        
-        .carousel-indicators {
-            text-align: center;
-            position: relative;
-            /* 更改为相对定位 */
-            margin-top: 10px;
-            /* 添加一些顶部间距 */
-            margin-bottom: 20px;
-            /* 添加一些底部间距，为下面的内容留出空间 */
+            bottom: 0;
             width: 100%;
-        }
-        
-        .dot {
-            cursor: pointer;
-            height: 8px;
-            width: 8px;
-            margin: 0 5px;
-            background-color: #717171;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-        
-        .dot.active {
-            background-color: #27c96d;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0; /* 添加上下内边距 */
+            background-color: grey; /* 设置背景颜色 */
+            color: #ffffff; /* 设置文字颜色 */
         }
     </style>
 </head>
 
-<body class="light-theme">
+<body>
     <header>
         <nav>
             <ul>
-                <nav>
-                    <ul>
-
-                        <li><a href="profile.html" data-text-en="Profile" data-text-zh="个人资料">Profile</a></li>
-                        <li><a href="settings.html" data-text-en="Settings" data-text-zh="设置">Settings</a></li>
-                        <li><a href="logout.html" data-text-en="Logout" data-text-zh="退出">Logout</a></li>
-                        <li><a href="video.html" data-text-en="Video" data-text-zh="视频">Video</a></li>
-                        <li><a href="music.html" data-text-en="Music" data-text-zh="音乐">Music</a></li>
-                    </ul>
-                </nav>
+                <li><a href="https://profile.328249.xyz/">Profile</a></li>
+                <li><a href="https://blog.328249.xyz/">Blog</a></li>
+                <li><a href="https://music.328249.xyz/">Music</a></li>
+                <li><a href="https://video.328249.xyz/">Video</a></li>
+                <li><a href="https://photo.328249.xyz/">Photo</a></li>
             </ul>
         </nav>
     </header>
@@ -140,96 +82,12 @@
     <section class="content">
         <!-- Your content goes here -->
         <h2>Recent Activities</h2>
-        <!-- 照片轮播容器 -->
-        <div class="carousel">
-            <!-- 轮播图片 -->
-            <div class="carousel-images">
-                <img src="0.jpg" alt="Image 1">
-                <img src="11.jpg" alt="Image 2">
-                <img src="2.jpg" alt="Image 3">
-                <img src="654.jpg" alt="Image 3">
-                <img src="655.jpg" alt="Image 3">
-                <img src="657.jpg" alt="Image 3">
-                <img src="658.jpg" alt="Image 3">
-                <img src="659.jpg" alt="Image 3">
-                <!-- 更多图片... -->
-            </div>
-            <!-- 轮播导航按钮 -->
-            <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
-
-        </div>
-        <div class="carousel-indicators">
-        </div>
-
-        <p>Here are some of your recent activities...</p>
+        <!-- Add your recent activities or other content here -->
     </section>
+
     <footer>
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
+        <p>&copy; 2025 Your Website</p>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取保存的主题设置
-            var savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.className = savedTheme + '-theme'; // 应用主题
-
-            var savedLanguage = localStorage.getItem('language') || 'en';
-            updateLanguageTexts(savedLanguage); // 更新页面文本
-
-
-
-            // 初始化轮播器，显示第一张图片
-            showSlide(currentSlide);
-        });
-        // 照片轮播逻辑
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-images img');
-        const totalSlides = slides.length;
-
-        function showSlide(index) {
-            slides.forEach((slide) => {
-                slide.classList.remove('active');
-            });
-            slides[index].classList.add('active');
-            updateIndicators(index); // 更新指示器状态
-        }
-
-        function moveSlide(step) {
-            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        // 初始化轮播器，显示第一张图片
-        showSlide(currentSlide);
-
-        // 自动轮播
-        setInterval(() => {
-            moveSlide(1);
-        }, 3000); // 每3秒切换一次图片
-        function updateLanguageTexts(lang) {
-            document.querySelectorAll('a[data-text-en]').forEach(function(anchor) {
-                if (lang === 'zh') {
-                    anchor.textContent = anchor.getAttribute('data-text-zh');
-                } else {
-                    anchor.textContent = anchor.getAttribute('data-text-en');
-                }
-            });
-        }
-        // 创建指示器
-        const indicatorsContainer = document.querySelector('.carousel-indicators');
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => moveSlide(i - currentSlide));
-            indicatorsContainer.appendChild(dot);
-        }
-        // 更新指示器状态
-        function updateIndicators(index) {
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-    </script>
 </body>
 
 </html>
