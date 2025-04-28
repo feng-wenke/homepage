@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
-        /* 主题样式 */
-        body {
+         /* 主题样式 */
+         body {
             background-color: #f0f0f0;
             color: #333;
             position: relative;
@@ -60,6 +60,21 @@
             color: #ffffff; /* 设置文字颜色 */
         }
     </style>
+   
+    <script>
+        // 指定允许的来源页面
+        const allowedReferrer = "https://login.328249.xyz/";
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // 检查referrer
+            if (document.referrer !== allowedReferrer) {
+                // 如果referrer不是指定的页面，重定向到其他页面或显示消息
+                //window.location.href = "https://your-redirect-page.com";
+                // 或者显示一条消息
+                alert("You can only access this page from a specific page.");
+            }
+        });
+    </script>
 </head>
 
 <body>
