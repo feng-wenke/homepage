@@ -168,6 +168,13 @@
                 soundButton.classList.remove('active');
             }
         }
+
+        // Ensure video plays when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            video.play().catch(function(error) {
+                console.log('Video play failed:', error);
+            });
+        });
     </script>
 </body>
 
