@@ -156,7 +156,6 @@
     <script>
         var video = document.getElementById('background-video');
         var soundButton = document.querySelector('.sound-control button');
-        var hasPlayed = false;
 
         function toggleSound() {
             if (video.muted) {
@@ -170,17 +169,11 @@
             }
         }
 
-        // Play video music when user scrolls to a certain position
-        window.addEventListener('scroll', function() {
-            var scrollPosition = window.scrollY;
-            var videoPosition = video.getBoundingClientRect().top;
-
-            if (scrollPosition > videoPosition && !hasPlayed) {
-                video.muted = false;
-                video.volume = 1; // Set volume to maximum
-                hasPlayed = true;
-                soundButton.classList.add('active');
-            }
+        // Ensure video plays when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            video.play().catch(function(error) {
+                console.log('Video play failed:', error);
+            });
         });
     </script>
 </body>
