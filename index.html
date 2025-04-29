@@ -24,6 +24,12 @@
             height: auto;
             z-index: -100;
             background-size: cover;
+            overflow: hidden;
+        }
+        
+        .video-background video {
+            width: 100%;
+            height: auto;
         }
         /* 导航栏样式 */
         
@@ -88,16 +94,30 @@
         }
         
         .sound-control button {
-            padding: 10px 20px;
+            width: 50px;
+            height: 50px;
             background-color: #e1801f;
             color: white;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .sound-control button:hover {
             background-color: #e11f1f;
+        }
+        
+        .sound-control button::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
         }
     </style>
 </head>
@@ -135,19 +155,34 @@
     </footer>
 
     <div class="sound-control">
-        <button onclick="toggleSound()">Toggle Sound</button>
+        <button onclick="toggleSound()">🔊</button>
     </div>
 
     <script>
         var video = document.getElementById('background-video');
+        var hasPlayed = false;
 
         function toggleSound() {
             if (video.muted) {
                 video.muted = false;
+                video.volume = 1; // Set volume to maximum
             } else {
                 video.muted = true;
+                video.volume = 0; // Set volume to minimum
             }
         }
+
+        // Play video music when user scrolls to a certain position
+        window.addEventListener('scroll', function() {
+            var scrollPosition = window.scrollY;
+            var videoPosition = video.getBoundingClientRect().top;
+
+            if (scrollPosition > videoPosition && !hasPlayed) {
+                video.muted = false;
+                video.volume = 1; // Set volume to maximum
+                hasPlayed = true;
+            }
+        });
     </script>
 </body>
 
