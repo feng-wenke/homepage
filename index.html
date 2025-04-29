@@ -7,11 +7,13 @@
     <title>Home Page</title>
     <style>
         /* 主题样式 */
-        body, html {
+        
+        body,
+        html {
             height: 100%;
             margin: 0;
         }
-
+        
         .video-background {
             position: fixed;
             right: 0;
@@ -23,8 +25,8 @@
             z-index: -100;
             background-size: cover;
         }
-
         /* 导航栏样式 */
+        
         nav ul {
             list-style-type: none;
             padding: 0;
@@ -35,12 +37,12 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
+        
         nav ul li {
             display: block;
             margin: 10px 0;
         }
-
+        
         nav ul li a {
             text-decoration: none;
             color: #ffffff;
@@ -51,13 +53,13 @@
             width: 150px;
             transition: background-color 0.3s, color 0.3s;
         }
-
+        
         nav ul li a:hover {
             background-color: rgb(255, 192, 192);
             color: #ffffff;
         }
-
         /* 欢迎信息样式 */
+        
         .welcome-message {
             text-align: center;
             margin-top: 20px;
@@ -65,32 +67,47 @@
             position: relative;
             z-index: 10;
         }
-
         /* 页脚样式 */
+        
         footer {
             position: absolute;
             bottom: 0;
             width: 100%;
             text-align: center;
-            margin-top: 20px;
             padding: 10px 0;
-            background-color: grey;
-            color: #ffffff;
+            color: white;
+            background-color: #333;
+        }
+        /* 控制按钮样式 */
+        
+        .sound-control {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+        
+        .sound-control button {
+            padding: 10px 20px;
+            background-color: #e1801f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .sound-control button:hover {
+            background-color: #e11f1f;
         }
     </style>
 </head>
 
 <body>
-    <video autoplay muted loop id="myVideo" class="video-background">
-        <source src="your-video-file.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
     <header>
         <nav>
             <ul>
-                <li><a href="https://profile.328249.xyz/">Profile</a></li>
-                <li><a href="https://blog.328249.xyz/">Blog</a></li>
+                <li><a href="https://home.328249.xyz/">Home</a></li>
+                <li><a href="https://note.328249.xyz/">Notebook</a></li>
                 <li><a href="https://music.328249.xyz/">Music</a></li>
                 <li><a href="https://video.328249.xyz/">Video</a></li>
                 <li><a href="https://photo.328249.xyz/">Photo</a></li>
@@ -98,10 +115,15 @@
         </nav>
     </header>
 
+    <div class="video-background">
+        <video src="1.mp4" type="video/mp4" autoplay muted loop id="background-video"></video>
+    </div>
+
     <div class="welcome-message">
         <h1>Welcome, User!</h1>
         <p>Here is your personalized home page.</p>
     </div>
+
     <section class="content">
         <!-- Your content goes here -->
         <h2> </h2>
@@ -111,6 +133,22 @@
     <footer>
         <p>&copy; 2025 Your Website</p>
     </footer>
+
+    <div class="sound-control">
+        <button onclick="toggleSound()">Toggle Sound</button>
+    </div>
+
+    <script>
+        var video = document.getElementById('background-video');
+
+        function toggleSound() {
+            if (video.muted) {
+                video.muted = false;
+            } else {
+                video.muted = true;
+            }
+        }
+    </script>
 </body>
 
 </html>
