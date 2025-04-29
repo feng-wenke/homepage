@@ -110,7 +110,8 @@
         .sound-control button:hover {
             background-color: #e11f1f;
         }
-        
+        /* 移除按钮中间的小点 */
+        /*
         .sound-control button::before {
             content: '';
             width: 10px;
@@ -118,6 +119,11 @@
             background-color: white;
             border-radius: 50%;
             position: absolute;
+        }
+        */
+        
+        .sound-control button.active {
+            background-color: red;
         }
     </style>
 </head>
@@ -166,9 +172,11 @@
             if (video.muted) {
                 video.muted = false;
                 video.volume = 1; // Set volume to maximum
+                document.querySelector('.sound-control button').classList.add('active');
             } else {
                 video.muted = true;
                 video.volume = 0; // Set volume to minimum
+                document.querySelector('.sound-control button').classList.remove('active');
             }
         }
 
